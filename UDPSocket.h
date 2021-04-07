@@ -76,7 +76,11 @@ private:
 	std::string    m_address[UDP_SOCKET_MAX];
 	unsigned short m_port[UDP_SOCKET_MAX];
 	unsigned int   m_af[UDP_SOCKET_MAX];
+#if defined(_WIN32) || defined(_WIN64)
+	SOCKET         m_fd[UDP_SOCKET_MAX];
+#else
 	int            m_fd[UDP_SOCKET_MAX];
+#endif
 	unsigned int   m_counter;
 };
 

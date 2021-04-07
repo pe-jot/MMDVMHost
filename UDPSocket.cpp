@@ -188,7 +188,11 @@ bool CUDPSocket::open(const unsigned int index, const unsigned int af, const std
 		return false;
 	}
 
+#if defined(_WIN32) || defined(_WIN64)
+	SOCKET fd = ::socket(addr.ss_family, SOCK_DGRAM, 0);
+#else
 	int fd = ::socket(addr.ss_family, SOCK_DGRAM, 0);
+#endif
 	if (fd < 0) {
 #if defined(_WIN32) || defined(_WIN64)
 		LogError("Cannot create the UDP socket, err: %lu", ::GetLastError());
@@ -345,7 +349,11 @@ bool CUDPSocket::write(const unsigned char* buffer, unsigned int length, const s
 void CUDPSocket::close()
 {
 	for (int i = 0; i < UDP_SOCKET_MAX; i++)
+#if defined(_WIN32) || defined(_WIN64)
+		closesocket(m_fd[i]);
+#else
 		close(m_fd[i]);
+#endif
 }
 
 void CUDPSocket::close(const unsigned int index)
