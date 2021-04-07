@@ -185,6 +185,11 @@ void Log(unsigned int level, const char* fmt, ...)
 		::fflush(stdout);
 	}
 
+#if (defined(_WIN32) || defined(_WIN64)) && defined(_DEBUG)
+	OutputDebugStringA(buffer);
+	OutputDebugStringA("\n");
+#endif
+
 	if (level == 6U) {		// Fatal
 		::fclose(m_fpLog);
 		exit(1);
