@@ -1,0 +1,11 @@
+[Unit]
+Description=MMDVM Monitor
+After=dhcpd5.service syslog.service
+
+[Service]
+ExecStart=/usr/sbin/MMDVM_Monitor
+KillMode=process
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
