@@ -1,3 +1,11 @@
+### Difference / extensions to original version from G4KLX:
+* Have a lightweight "monitor" version which only connects to the DMR network
+  in order to print a CLI variant of a "Last Heard" dashboard. This works for
+  direct connection to either IPSC2 or Brandmeister master server.
+* Have a makefile for cross-compiling for ARM targets
+
+### Original description:
+
 These are the source files for building the MMDVMHost, the program that
 interfaces to the MMDVM or DVMega on the one side, and a suitable network on
 the other. It supports D-Star, DMR, P25 Phase 1, NXDN, System Fusion,
