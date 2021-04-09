@@ -195,10 +195,10 @@ void CDMRMonitor::AnalyzeAndReportData(const CDMRData& data)
 			if (mUseColorizedConsole)
 			{
 				LogMessage("Slot: %s%d%s Source: %s%d%s %s%s%s Destination: %s%d%s", 
-					CONSOLE_TEXT_MAGENTA, slot, CONSOLE_TEXT_WHITE,
-					CONSOLE_TEXT_BRIGHT, sourceId, CONSOLE_TEXT_WHITE,
-					CONSOLE_TEXT_GREEN, callsign.c_str(), CONSOLE_TEXT_WHITE,
-					CONSOLE_TEXT_BLUE, destinationId, CONSOLE_TEXT_WHITE
+					CONSOLE_TEXT_MAGENTA, slot, CONSOLE_DEFAULT,
+					CONSOLE_TEXT_BRIGHT, sourceId, CONSOLE_DEFAULT,
+					CONSOLE_TEXT_GREEN, callsign.c_str(), CONSOLE_DEFAULT,
+					CONSOLE_TEXT_BLUE, destinationId, CONSOLE_DEFAULT
 				);
 			}
 			else
