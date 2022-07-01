@@ -19,24 +19,32 @@ OBJECTS = \
 		P25Data.o P25LowSpeedData.o P25Network.o P25NID.o P25Trellis.o P25Utils.o POCSAGControl.o POCSAGNetwork.o QR1676.o RemoteControl.o RS129.o RS241213.o \
 		RSSIInterpolator.o SerialController.o SerialPort.o StopWatch.o Sync.o SHA256.o TFTSerial.o TFTSurenoo.o Thread.o Timer.o UDPSocket.o UMP.o UserDB.o \
 		UserDBentry.o Utils.o YSFControl.o YSFConvolution.o YSFFICH.o YSFNetwork.o YSFPayload.o
+		
+MONITOR_OBJECTS = \
+		Conf.o DMRData.o DMRLookup.o DMRNetwork.o DMRDirectNetwork.o Log.o Mutex.o SHA256.o StopWatch.o Thread.o Timer.o UDPSocket.o UserDB.o UserDBentry.o Utils.o \
+		DMRMonitor.o MMDVM_Monitor.o
 
-all:		MMDVMHost RemoteCommand
+all:		MMDVMHost RemoteCommand MMDVM_Monitor
 
 MMDVMHost:	GitVersion.h $(OBJECTS) 
 		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o MMDVMHost
 
 RemoteCommand:	Log.o RemoteCommand.o UDPSocket.o
 		$(CXX) Log.o RemoteCommand.o UDPSocket.o $(CFLAGS) $(LIBS) -o RemoteCommand
-
+		
+MMDVM_Monitor:	$(MONITOR_OBJECTS)
+		$(CXX) $(MONITOR_OBJECTS) $(CFLAGS) $(LIBS) -o MMDVM_Monitor
+		
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
 		install -m 755 MMDVMHost /usr/local/bin/
 		install -m 755 RemoteCommand /usr/local/bin/
+		install -m 755 MMDVM_Monitor /usr/local/bin/
 
 clean:
-		$(RM) MMDVMHost RemoteCommand *.o *.d *.bak *~ GitVersion.h
+		$(RM) MMDVMHost RemoteCommand MMDVM_Monitor *.o *.d *.bak *~ GitVersion.h
 
 # Export the current git version if the index file exists, else 000...
 GitVersion.h:
